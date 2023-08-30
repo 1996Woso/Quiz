@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Math Quiz</h1>
+        <p id="question"></p>
+        <input type="number" id="answer" placeholder="Your Answer">
+        <button id="submit">Submit</button>
+        <p id="result"></p>
+    </div>
+    <script>
+  const questionElement = document.getElementById("question");
+  const answerElement = document.getElementById("answer");
+  const submitButton = document.getElementById("submit");
+  const resultElement = document.getElementById("result");
+
+  // Generate a random addition question
+  function generateQuestion() {
+    const num1 = Math.floor(Math.random() * 10);
+    const num2 = Math.floor(Math.random() * 10);
+    return `${num1} + ${num2}`;
+  }
+
+  // Initialize the quiz
+  function initializeQuiz() {
+    const question = generateQuestion();
+    questionElement.textContent = question;
+    answerElement.value = "";
+    resultElement.textContent = "";
+  }
+
+  // Check the answer and provide feedback
+  function checkAnswer() {
+    const [num1, num2] = questionElement.textContent.split("+").map(Number);
+    const userAnswer = parseInt(answerElement.value);
+    const correctAnswer = num1 + num2;
+    if (userAnswer === correctAnswer) {
+      resultElement.textContent = "Correct!";
+    } else {
+      resultElement.textContent = "Incorrect. Try again.";
+    }
+  }
+
+  // Attach event listeners
+  submitButton.addEventListener("click", checkAnswer);
+
+  // Initialize the quiz when the page loads
+  initializeQuiz();
+    </script>
+</body>
+</html>
